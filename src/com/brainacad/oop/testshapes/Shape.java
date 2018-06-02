@@ -12,6 +12,10 @@ public class Shape {
         return "Shape, color is: " + shapeColor;
     }
 
+    public String getShapeColor() {
+        return shapeColor;
+    }
+
     public double calcArea(){
         return 0.0;
     }
