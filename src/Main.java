@@ -1,25 +1,10 @@
-import com.brainacad.oop.testshapes.Circle;
-import com.brainacad.oop.testshapes.Rectangle;
-import com.brainacad.oop.testshapes.Shape;
-import com.brainacad.oop.testshapes.Triangle;
+import com.brainacad.oop.testshapes.*;
+
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        /*Shape shape = new Shape("GREEN");
-        System.out.println(shape);
-        System.out.println("Shape area is: "+shape.calcArea());
-
-        Circle circle = new Circle("YELLOW",10);
-        System.out.println(circle);
-        System.out.printf("Shape area is: %.5f\n",circle.calcArea());
-
-        Rectangle rectangle = new Rectangle("BLACK",11,22);
-        System.out.println(rectangle);
-        System.out.println("Shape area is: "+rectangle.calcArea());
-
-        Triangle triangle = new Triangle("RED",5,5,5);
-        System.out.println(triangle);
-        System.out.printf("Shape area is: %.3f",triangle.calcArea());*/
 
         Shape[] arr = {new Rectangle("Black",10,5)
                 ,new Rectangle("Black",9,6)
@@ -30,29 +15,46 @@ public class Main {
                 ,new Circle("Green",19.2)
                 ,new Triangle("Red",3,4,5)
                 ,new Triangle("Red",12,13,8)};
-        double sumArea = 0;
         for (Shape shape : arr) {
-            double area = shape.calcArea();
-            sumArea+=area;
-            System.out.printf(shape+", area is: %.5f\n",area);
+            shape.draw();
         }
-        System.out.printf("All shapes total area: %.5f\n",sumArea);
-        double sumRectArea = 0;
-        double sumTriangleArea = 0;
-        double sumCircleArea = 0;
-        for (Shape shape : arr) {
-            double area = shape.calcArea();
-            if (shape instanceof Rectangle){
-                sumRectArea+=area;
-            }else if (shape instanceof Circle){
-                sumCircleArea+=area;
-            }else if (shape instanceof Triangle){
-                sumTriangleArea+=area;
-            }
-        }
-        System.out.printf("Rectangles total area: %.5f\n",sumRectArea);
-        System.out.printf("Circle total area: %.5f\n",sumCircleArea);
-        System.out.printf("Triangle total area: %.5f\n",sumTriangleArea);
 
+        Shape rect1 = new Rectangle("Black",15,15);
+        Shape rect2 = new Rectangle("Red",14,7);
+
+        System.out.println("rect1.compareTo(rect2) = " + rect1.compareTo(rect2));
+        System.out.println("rect2.compareTo(rect1) = " + rect2.compareTo(rect1));
+        System.out.println("----------------------------------");
+        Shape[] arr2 = {new Rectangle("Black",10,5)
+                ,new Rectangle("Black",9,6)
+                ,new Rectangle("Black",8,7)
+                ,new Rectangle("Black",4,5)
+                ,new Rectangle("Black",5,12)
+                ,new Rectangle("Black",12,8)};
+        Arrays.sort(arr2);
+        for (Shape shape : arr2) {
+            shape.draw();
+        }
+        System.out.println("-----------------SpecificComparator-----------------");
+        Shape[] arr3 = {new Rectangle("Black",10,5)
+                ,new Rectangle("Red",9,6)
+                ,new Rectangle("Red",3,6)
+                ,new Rectangle("White",8,7)
+                ,new Rectangle("Pink",4,5)
+                ,new Rectangle("Yellow",5,12)
+                ,new Circle("Green",8.9)
+                ,new Circle("Red",19.2)
+                ,new Circle("Red",4.7)
+                ,new Triangle("Black",3,4,5)
+                ,new Triangle("Magenta",12,13,8)};
+        Arrays.sort(arr3,new ShapeColorComparator());
+        for (Shape shape : arr3) {
+            shape.draw();
+        }
+        System.out.println("-----------------Java8Comparator-----------------");
+        Arrays.sort(arr3,Comparator.comparing(Shape::getShapeColor).thenComparing(Comparator.comparing(Shape::calcArea).reversed()));
+        for (Shape shape : arr3) {
+            shape.draw();
+        }
     }
 }

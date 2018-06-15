@@ -1,6 +1,6 @@
 package com.brainacad.oop.testshapes;
 
-public class Shape {
+public abstract class Shape implements Drawable, Comparable<Shape>{
     private String shapeColor;
 
     public Shape(String shapeColor) {
@@ -16,7 +16,15 @@ public class Shape {
         return shapeColor;
     }
 
-    public double calcArea(){
-        return 0.0;
+    @Override
+    public void draw() {
+        System.out.printf(toString()+", area is: %.5f\n",calcArea());
     }
+
+    @Override
+    public int compareTo(Shape o) {
+        return Double.compare(calcArea(),o.calcArea());
+    }
+
+    public abstract double calcArea();
 }
