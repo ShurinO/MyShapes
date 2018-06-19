@@ -2,6 +2,7 @@ import com.brainacad.oop.testshapes.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -64,6 +65,16 @@ public class Main {
             shapes[i] = Shape.parseShape(shapeStrings[i]);
         }
         for (Shape shape : shapes) {
+            shape.draw();
+        }
+        System.out.println("---------------ParseShapeFromConsole-------------------");
+        Scanner scanner = new Scanner(System.in);
+        int arraySize = Integer.parseInt(scanner.nextLine());
+        Shape[] shapesArray = new Shape[arraySize];
+        for (int i = 0; i < shapesArray.length; i++) {
+            shapesArray[i] = Shape.parseShape(scanner.nextLine());
+        }
+        for (Shape shape : shapesArray) {
             shape.draw();
         }
 
