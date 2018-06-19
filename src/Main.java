@@ -58,7 +58,7 @@ public class Main {
         }
 
         System.out.println("---------------ParseShape-------------------");
-        String[] shapeStrings = {"Rectangle:RED:10,20","Circle:BLACK:10","Rectangle:BLUE:4,15","Triangle:GREEN:9,7,12","Triangle:RED:4,6,22","Circle:YELLOW:6.7"};
+        String[] shapeStrings = {"Rectangle:RED:10,20","Circle:BLACK:10","Rectangle:BLUE:4,15","Triangle:GREEN:9,7,12","Triangle:RED:4,6,22.2","Circle:YELLOW:6.7"};
         Shape[] shapes = new Shape[shapeStrings.length];
         for (int i = 0; i < shapeStrings.length; i++) {
             shapes[i] = Shape.parseShape(shapeStrings[i]);

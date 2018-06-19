@@ -17,4 +17,11 @@ public class Circle extends Shape {
     public String toString() {
         return "This is Circle, color: "+getShapeColor()+", radius="+radius;
     }
+
+    public static Circle parseCircle(String circleString){
+        String[] circleParts = circleString.split(":");
+        String circleColor = circleParts[1];
+        double radius = Double.parseDouble(circleParts[2]);
+        return new Circle(circleColor,radius);
+    }
 }
