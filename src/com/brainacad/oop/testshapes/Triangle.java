@@ -23,13 +23,18 @@ public class Triangle extends Shape{
         return Math.sqrt(s*(s-a)*(s-b)*(s-c));
     }
 
-    public static Triangle parseTriangle(String triangleString){
+    public static Triangle parseTriangle(String triangleString) throws InvalidShapeStringException {
         String[] triangleParts = triangleString.split(":");
         String triangleColor = triangleParts[1];
         String[] triangleSizes = triangleParts[2].split(",");
-        double x = Double.parseDouble(triangleSizes[0]);
-        double y = Double.parseDouble(triangleSizes[1]);
-        double z = Double.parseDouble(triangleSizes[2]);
-        return new Triangle(triangleColor,x,y,z);
+        try {
+            double x = Double.parseDouble(triangleSizes[0]);
+            double y = Double.parseDouble(triangleSizes[1]);
+            double z = Double.parseDouble(triangleSizes[2]);
+            return new Triangle(triangleColor,x,y,z);
+        }catch (NumberFormatException|ArrayIndexOutOfBoundsException e) {
+            throw new InvalidShapeStringException("radius is not defined");
+        }
+
     }
 }

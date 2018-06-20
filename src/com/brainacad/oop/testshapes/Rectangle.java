@@ -20,12 +20,18 @@ public class Rectangle extends Shape {
         return width*height;
     }
 
-    public static Rectangle parseRectangle(String rectString){
+    public static Rectangle parseRectangle(String rectString) throws InvalidShapeStringException{
         String[] rectParts = rectString.split(":");
         String rectangleColor = rectParts[1];
         String[] rectangleSizes = rectParts[2].split(",");
-        double a = Double.parseDouble(rectangleSizes[0]);
-        double b = Double.parseDouble(rectangleSizes[1]);
-        return new Rectangle(rectangleColor,a,b);
+
+        try {
+            double a = Double.parseDouble(rectangleSizes[0]);
+            double b = Double.parseDouble(rectangleSizes[1]);
+            return new Rectangle(rectangleColor,a,b);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidShapeStringException("size is not defined");
+        }
+
     }
 }

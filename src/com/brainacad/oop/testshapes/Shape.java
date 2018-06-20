@@ -28,20 +28,20 @@ public abstract class Shape implements Drawable, Comparable<Shape>{
 
     public abstract double calcArea();
 
-    public static Shape parseShape(String shapeString){
+    public static Shape parseShape(String shapeString) throws InvalidShapeStringException{
         String[] shapeParts = shapeString.split(":");
-        Shape shape = null;
+        if (shapeParts.length!=3){
+            throw new InvalidShapeStringException(shapeString);
+        }
         switch (shapeParts[0]){
             case "Rectangle":
-                shape = Rectangle.parseRectangle(shapeString);
-                break;
+                return Rectangle.parseRectangle(shapeString);
             case "Triangle":
-                shape = Triangle.parseTriangle(shapeString);
-                break;
+                return Triangle.parseTriangle(shapeString);
             case "Circle":
-                shape = Circle.parseCircle(shapeString);
-                break;
+                return Circle.parseCircle(shapeString);
+                default:
+                    throw new InvalidShapeStringException(shapeString);
         }
-        return shape;
     }
 }
